@@ -13,7 +13,6 @@ class Edition extends Model
         'name',
         'theme',
         'regle',
-        'equipe',
         'lieu',
         'date'
     ];

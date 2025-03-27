@@ -91,4 +91,30 @@ class JWTAuthController extends Controller
 
         return response()->json(['message' => 'Successfully logged out']);
     }
+
+    public function index()
+    {
+        $users = User::with('roles')->get();
+        return response()->json([
+            'status' => 'success',
+            'data' => $users
+        ]);
+    }
+
+    public function show($id)
+    {
+        $user = User::with('roles')->find($id);
+        
+        if (!$user) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Utilisateur non trouvé'
+            ], 404);
+        }
+
+        return response()->json([
+            'status' => 'success',
+            'data' => $user
+        ]);
+    }
 }
