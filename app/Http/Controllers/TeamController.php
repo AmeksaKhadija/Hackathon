@@ -24,6 +24,11 @@ class TeamController extends Controller
 
         if ($equipes->isEmpty()) {
             return response()->json([
+                'message' => 'aucun team trouvée'
+            ]);
+        }
+        if ($equipes->isEmpty()) {
+            return response()->json([
                 'message' => 'aucun equipe trouvée'
             ]);
         }

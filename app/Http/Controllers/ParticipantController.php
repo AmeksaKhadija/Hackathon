@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Participant;
-use App\Http\Requests\StoreParticipantRequest;
-use App\Http\Requests\UpdateParticipantRequest;
+// use App\Http\Requests\StoreParticipantRequest;
+// use App\Http\Requests\UpdateParticipantRequest;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
 
 class ParticipantController extends Controller
 {
@@ -15,7 +17,11 @@ class ParticipantController extends Controller
      */
     public function index()
     {
-        //
+        $participants = Participant::with(['user', 'equipe', 'notifications'])->get();
+        return response()->json([
+            'status' => 'success',
+            'data' => $participants
+        ]);
     }
 
     /**
@@ -34,7 +40,7 @@ class ParticipantController extends Controller
      * @param  \App\Http\Requests\StoreParticipantRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreParticipantRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -68,7 +74,7 @@ class ParticipantController extends Controller
      * @param  \App\Models\Participant  $participant
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateParticipantRequest $request, Participant $participant)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -79,7 +85,7 @@ class ParticipantController extends Controller
      * @param  \App\Models\Participant  $participant
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Participant $participant)
+    public function destroy($id)
     {
         //
     }

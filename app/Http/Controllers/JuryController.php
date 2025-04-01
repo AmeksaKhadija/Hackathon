@@ -17,10 +17,15 @@ class JuryController extends Controller
      */
     public function index()
     {
-        $juries = Jury::with(['projets', 'member_jury'])->get();
+        $jury = Jury::with(['projets', 'member_jury'])->get();
+        if ($jury->isEmpty()) {
+            return response()->json([
+                'message' => 'aucun editions trouvée'
+            ]);
+        }
         return response()->json([
             'status' => 'success',
-            'data' => $juries
+            'data' => $jury
         ]);
     }
 
